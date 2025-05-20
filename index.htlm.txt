@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virginia Pediatric Asthma Action Plan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #0056b3;
+            margin-bottom: 30px;
+        }
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="date"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .color-zones-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .color-box {
+            border: 2px solid;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 150px;
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9em;
+        }
+        .color-box.green {
+            border-color: #4CAF50;
+            background-color: #e8f5e9;
+        }
+        .color-box.yellow {
+            border-color: #FFC107;
+            background-color: #fffde7;
+        }
+        .color-box.red {
+            border-color: #F44336;
+            background-color: #ffebee;
+        }
+        .color-box h2 {
+            margin-top: 0;
+            color: #333;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        .medication-group {
+            margin-top: 15px;
+        }
+        .medication-group label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .medication-input {
+            width: calc(100% - 22px);
+            padding: 8px;
+            margin-bottom: 8px;
+            border: 1px dashed #aaa;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .instruction-text {
+            font-style: italic;
+            margin-top: 20px;
+            border-top: 1px dashed #ccc;
+            padding-top: 15px;
+        }
+        .zone-paragraph {
+            margin-bottom: 10px;
+        }
+        .zone-paragraph strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .medication-action-group {
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        .medication-action-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .action-input {
+            width: calc(100% - 22px);
+            padding: 8px;
+            margin-bottom: 8px;
+            border: 1px dashed #aaa;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .emergency-action {
+            font-weight: bold;
+            color: #d32f2f;
+            margin-top: 15px;
+            text-align: center;
+            padding: 10px;
+            border: 2px solid #d32f2f;
+            border-radius: 5px;
+        }
+
+        /* Estilos para el botón de imprimir */
+        .print-button-container {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        .print-button {
+            padding: 12px 25px;
+            font-size: 1.1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .print-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos para impresión */
+        @media print {
+            body {
+                background-color: #fff;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                width: 100%;
+                max-width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            input {
+                border: none;
+                background-color: transparent;
+            }
+            .medication-input, .action-input {
+                border: none;
+            }
+            .color-zones-container {
+                justify-content: space-around;
+            }
+            .color-box {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                font-size: 0.85em;
+            }
+            .color-box h2 {
+                 font-size: 1em;
+            }
+            .instruction-text {
+                border-top: none;
+            }
+            .medication-action-group {
+                border-top: none;
+            }
+            .emergency-action {
+                border: 2px dashed #000;
+                color: #000;
+                background-color: #fff;
+            }
+            /* Ocultar el botón de imprimir en la impresión */
+            .print-button-container {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>VIRGINIA PEDIATRIC ASTHMA ACTION PLAN</h1>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="patientName">Nombre del Paciente:</label>
+                <input type="text" id="patientName" name="patientName">
+            </div>
+            <div class="form-group">
+                <label for="rut">RUT:</label>
+                <input type="text" id="rut" name="rut">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="age">Edad:</label>
+                <input type="number" id="age" name="age">
+            </div>
+            <div class="form-group">
+                <label for="doctorName">Médico Tratante:</label>
+                <input type="text" id="doctorName" name="doctorName">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="attentionDate">Fecha de Atención:</label>
+                <input type="date" id="attentionDate" name="attentionDate" readonly>
+            </div>
+        </div>
+
+        <div class="color-zones-container">
+            <div class="color-box green">
+                <h2>Zona Verde: Bien</h2>
+                <p class="zone-paragraph">
+                    **Cuando el paciente:**<br>
+                    - Sin problemas para respirar.<br>
+                    - Sin tos ni sibilancias.<br>
+                    - Duerme bien.<br>
+                    - Puede realizar actividades normales.
+                </p>
+
+                <div class="medication-group">
+                    <label>Fármacos de mantenimiento:</label>
+                    <input type="text" class="medication-input" placeholder="Medicamento 1 y dosis">
+                    <input type="text" class="medication-input" placeholder="Medicamento 2 y dosis">
+                    <input type="text" class="medication-input" placeholder="Medicamento 3 y dosis">
+                </div>
+
+                <p class="instruction-text">
+                    Uso el controlador a diario incluso cuando me siento bien. Uso la cámara de inhalación siempre.
+                </p>
+            </div>
+
+            <div class="color-box yellow">
+                <h2>Zona Amarilla: Precaución</h2>
+                <p class="zone-paragraph">
+                    **Cuando el paciente presenta:**<br>
+                    - Tos, sibilancias, pecho apretado.<br>
+                    - Se despierta en la noche por el asma.<br>
+                    - Síntomas con el juego o el trabajo.
+                </p>
+
+                <div class="medication-action-group">
+                    <p class="zone-paragraph">
+                        Usar Salbutamol <input type="text" class="action-input" placeholder="Nº de puffs y dosis"> cada 20 minutos por 1 hora.
+                    </p>
+                    <p class="zone-paragraph">
+                        Si los síntomas desaparecen, **volver a la Zona Verde.**
+                    </p>
+                    <p class="zone-paragraph">
+                        Si los síntomas persisten: Salbutamol <input type="text" class="action-input" placeholder="Nº de puffs y dosis"> cada 4-6 horas hasta que los síntomas desaparezcan.
+                    </p>
+                </div>
+
+                <p class="instruction-text">
+                    Consultar con un médico en caso de persistencia de síntomas en 24 horas o evolución a Zona Roja.
+                </p>
+            </div>
+
+            <div class="color-box red">
+                <h2>Zona Roja: Peligro</h2>
+                <p class="zone-paragraph">
+                    **En caso de que el paciente presente:**<br>
+                    - No puede comer, hablar o caminar bien.<br>
+                    - Falta de aire.<br>
+                    - Coloración azulada de labios.<br>
+                    - Cansado o letárgico.<br>
+                    - Hundimiento de costillas.
+                </p>
+
+                <div class="medication-action-group">
+                    <p class="zone-paragraph">
+                        Administrar Salbutamol <input type="text" class="action-input" placeholder="Dosis por el médico"> cada 10 minutos por 5 veces.
+                    </p>
+                </div>
+
+                <p class="emergency-action">
+                    **ASISTIR A SERVICIO DE URGENCIA MÁS CERCANO INMEDIATAMENTE.**
+                </p>
+            </div>
+        </div>
+
+        <div class="print-button-container">
+            <button class="print-button" onclick="window.print()">Imprimir / Guardar como PDF</button>
+        </div>
+    </div>
+
+    <script>
+        function getFormattedDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            let month = today.getMonth() + 1;
+            let day = today.getDate();
+
+            if (month < 10) {
+                month = '0' + month;
+            }
+            if (day < 10) {
+                day = '0' + day;
+            }
+
+            return `${year}-${month}-${day}`;
+        }
+
+        window.onload = function() {
+            document.getElementById('attentionDate').value = getFormattedDate();
+        };
+    </script>
+</body>
+</html>
